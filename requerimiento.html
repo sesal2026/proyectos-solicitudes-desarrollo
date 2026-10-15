@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Solicitud de Requerimiento de Cambios</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script src="js/auth.js"></script>
+  <script>Auth.guard(['USUARIO','ADMINISTRADOR'], { viewWithId: ['DESARROLLADOR'] });</script>
+</head>
+<body data-shell>
+
+  <main class="sheet">
+    <header class="letterhead">
+      <img src="img/logo.png" alt="Gobierno de la República de Honduras – Secretaría de Salud">
+    </header>
+
+    <form id="f" novalidate autocomplete="off">
+      <h1 class="doc-title">Solicitud de requerimiento de cambios</h1>
+      <p class="doc-sub no-print">Los campos con <span style="color:var(--bad)">*</span> son obligatorios. Tu avance se guarda automáticamente en este navegador.</p>
+
+      <div id="done" class="done" hidden>
+        <h3>✔ Solicitud registrada</h3>
+        <div id="done-msg"></div>
+        <div class="row">
+          <button type="button" class="btn" id="b-print2">Imprimir / Guardar PDF</button>
+          <a class="btn ghost" href="index.html">Ver historial</a>
+          <button type="button" class="btn ghost" id="b-new">Nueva solicitud</button>
+        </div>
+      </div>
+
+      <!-- DATOS GENERALES -->
+      <section class="section">
+        <h2>Datos del solicitante</h2>
+        <div class="body">
+          <div class="grid">
+            <label class="field req col-8"><span class="lbl">Nombre del sistema</span>
+              <input type="text" name="sistema" maxlength="150" required placeholder="Nombre del sistema"></label>
+            <label class="field req col-4"><span class="lbl">Fecha de solicitud</span>
+              <input type="date" name="fecha" required></label>
+
+            <label class="field req col-12"><span class="lbl">Establecimiento / Unidad / Departamento</span>
+              <input type="text" name="establecimiento" maxlength="200" required placeholder="Establecimiento, unidad o departamento que solicita"></label>
+            <label class="field req col-8"><span class="lbl">Región sanitaria / Municipio</span>
+              <input type="text" name="region" maxlength="200" required placeholder="Región sanitaria y municipio a la que pertenece el solicitante"></label>
+            <label class="field req col-4"><span class="lbl">Área</span>
+              <input type="text" name="area" maxlength="150" required placeholder="Área a la que pertenece"></label>
+
+            <label class="field req col-6"><span class="lbl">Solicitante</span>
+              <input type="text" name="solicitante" maxlength="150" required placeholder="Nombre de quien realiza la solicitud"></label>
+            <label class="field req col-6"><span class="lbl">Puesto / Cargo</span>
+              <input type="text" name="puesto" maxlength="120" required></label>
+
+            <label class="field req col-6"><span class="lbl">Enlace técnico</span>
+              <input type="text" name="enlace" maxlength="150" required placeholder="Persona disponible para cualquier consulta"></label>
+            <label class="field req col-6"><span class="lbl">Correo / Número</span>
+              <input type="text" name="contacto" maxlength="150" required placeholder="correo@salud.gob.hn  ó  9999-9999"></label>
+          </div>
+        </div>
+      </section>
+
+      <!-- DESCRIPCIÓN DE REQUERIMIENTOS -->
+      <section class="section">
+        <h2>Descripción de requerimientos</h2>
+        <div class="body">
+          <div id="reqs"></div>
+          <div class="tbl-actions no-print"><button type="button" class="btn ghost sm" id="b-addreq">+ Agregar requerimiento</button></div>
+        </div>
+      </section>
+
+      <!-- ANEXO 1 -->
+      <p class="note"><em>Nota:</em> Esta información deberá ser llenada por el <strong>Coordinador de Desarrollo de la UGI</strong>.</p>
+      <section class="section">
+        <h2>Anexo 1 – Acuerdos</h2>
+        <div class="body">
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr>
+                <th style="width:190px">Actividad</th><th>Responsable</th><th style="width:170px">Fecha tentativa de entrega</th><th>Observación</th>
+              </tr></thead>
+              <tbody id="a1"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ANEXO 2 -->
+      <p class="note"><em>Nota:</em> Esta información deberá ser llenada por el <strong>Solicitante de los cambios</strong> una vez estos ya se encuentren disponibles en el <strong>Servidor de Pruebas (QA)</strong>.</p>
+      <section class="section">
+        <h2>Anexo 2 – Criterios de aceptación</h2>
+        <div class="body">
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th style="width:190px">Actividad</th><th style="width:270px">Resolución</th><th>Observación</th></tr></thead>
+              <tbody id="a2"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <footer class="sheet-foot">
+        <span class="ver">Versión 1.1</span>
+        <img src="img/footer.png" alt="Barrio El Centro, Avenida Cervantes, contiguo al Correo Nacional, Tegucigalpa, M.D.C. Honduras · www.salud.gob.hn">
+      </footer>
+
+      <div class="actions no-print">
+        <button type="submit" class="btn">Registrar solicitud</button>
+        <button type="button" class="btn ghost" id="b-print">Imprimir / PDF</button>
+        <button type="button" class="btn ghost" id="b-json">Descargar JSON</button>
+        <span class="spacer"></span>
+        <span class="status" id="status" aria-live="polite"></span>
+        <button type="button" class="btn danger" id="b-clear">Limpiar</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/requerimiento.js"></script>
+</body>
+</html>

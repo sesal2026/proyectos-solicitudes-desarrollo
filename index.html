@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formatos de solicitud · UGI Secretaría de Salud</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script src="js/auth.js"></script>
+  <script>Auth.guard(['USUARIO','ADMINISTRADOR']);</script>
+</head>
+<body data-shell>
+
+  <main class="sheet">
+    <header class="letterhead">
+      <img src="img/logo.png" alt="Gobierno de la República de Honduras – Secretaría de Salud">
+    </header>
+
+    <h1 class="doc-title">Formatos de solicitud</h1>
+    <p class="doc-sub">Seleccione el formato que desea completar.</p>
+
+    <div class="cards">
+      <a class="card" href="requerimiento.html">
+        <span class="badge requerimiento">Versión 1.1</span>
+        <h2>Solicitud de Requerimiento de Cambios</h2>
+        <p>Para solicitar nuevas funcionalidades o modificaciones a un sistema, con acuerdos de entrega y criterios de aceptación en QA.</p>
+        <span class="go">Llenar formato →</span>
+      </a>
+      <a class="card" href="cambios.html">
+        <span class="badge cambios">Versión 2.1</span>
+        <h2>Solicitud de Cambios en Ambientes</h2>
+        <p>Para registrar el paso a paso, archivos, sistemas afectados, plan de pruebas y resultados de un cambio en ambientes.</p>
+        <span class="go">Llenar formato →</span>
+      </a>
+    </div>
+
+    <section class="section">
+      <h2 id="hist-title">Historial de solicitudes registradas</h2>
+      <div class="body">
+        <div class="tbl-wrap">
+          <table class="tbl" id="hist" hidden>
+            <thead><tr><th>Formato</th><th>Código</th><th>Título / Sistema</th><th>Solicitante</th><th style="width:110px">Fecha</th><th style="width:230px">Acciones</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="empty" id="empty">Aún no hay solicitudes registradas en este navegador.</p>
+      </div>
+    </section>
+    <p class="doc-sub" style="margin-top:12px">Las solicitudes se almacenan localmente en este navegador. Use «Descargar JSON» para respaldarlas o enviarlas.</p>
+
+    <footer class="sheet-foot">
+      <img src="img/footer.png" alt="Barrio El Centro, Avenida Cervantes, contiguo al Correo Nacional, Tegucigalpa, M.D.C. Honduras · www.salud.gob.hn">
+    </footer>
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>

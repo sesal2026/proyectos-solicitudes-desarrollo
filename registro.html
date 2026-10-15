@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crear cuenta · UGI Secretaría de Salud</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body class="auth-page">
+  <main class="auth-box wide">
+    <div class="auth-head">
+      <img src="img/logo.png" alt="Gobierno de la República de Honduras – Secretaría de Salud">
+      <h1>Crear cuenta de Usuario</h1>
+      <p>Registro para llenar los formatos de solicitud. Las cuentas de Desarrollador, Supervisor y Administrador las crea el administrador.</p>
+    </div>
+    <form class="auth-body" id="f" novalidate autocomplete="off">
+      <div class="auth-grid">
+        <div class="auth-sep">Cuenta</div>
+        <label class="field req"><span class="lbl">Nombre de usuario</span><input type="text" id="username" maxlength="30" required autocomplete="username" placeholder="ej.: jperez"></label>
+        <label class="field req"><span class="lbl">Correo electrónico</span><input type="email" id="email" required autocomplete="email" placeholder="usuario@salud.gob.hn"></label>
+        <label class="field req"><span class="lbl">Contraseña</span><input type="password" id="pw" required autocomplete="new-password">
+          <div class="strength" aria-hidden="true"><i id="meter"></i></div><small class="muted" id="pw-hint">Mínimo 8 caracteres, con letras y números.</small></label>
+        <label class="field req"><span class="lbl">Confirmar contraseña</span><input type="password" id="pw2" required autocomplete="new-password"></label>
+
+        <div class="auth-sep">Datos personales</div>
+        <label class="field req full"><span class="lbl">Nombre completo</span><input type="text" id="name" maxlength="120" required autocomplete="name"></label>
+        <label class="field"><span class="lbl">Número de identidad (opcional)</span><input type="text" id="dni" inputmode="numeric" maxlength="15" placeholder="0000-0000-00000"></label>
+        <label class="field req"><span class="lbl">Teléfono</span><input type="tel" id="tel" maxlength="20" required autocomplete="tel" placeholder="9999-9999"></label>
+        <label class="field req"><span class="lbl">Establecimiento / Unidad</span><input type="text" id="unidad" maxlength="150" required></label>
+        <label class="field"><span class="lbl">Puesto / Cargo</span><input type="text" id="cargo" maxlength="120"></label>
+      </div>
+      <p class="form-err" id="err" role="alert" hidden></p>
+      <button type="submit" class="btn">Crear cuenta</button>
+      <p class="auth-links">¿Ya tienes cuenta? <a href="login.html">Iniciar sesión</a></p>
+    </form>
+  </main>
+  <script src="js/auth.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/registro.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iniciar sesión · UGI Secretaría de Salud</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body class="auth-page">
+  <main class="auth-box">
+    <div class="auth-head">
+      <img src="img/logo.png" alt="Gobierno de la República de Honduras – Secretaría de Salud">
+      <h1 id="title">Iniciar sesión</h1>
+      <p id="subtitle">Selecciona tu rol e ingresa con tu correo electrónico.</p>
+    </div>
+
+    <!-- Inicio de sesión -->
+    <form class="auth-body" id="f-login" novalidate autocomplete="on">
+      <fieldset class="role-tiles" id="roles"><legend>Ingresar como</legend></fieldset>
+      <p class="role-hint" id="role-hint"></p>
+
+      <label class="field"><span class="lbl">Correo electrónico</span>
+        <input type="email" id="email" name="email" autocomplete="username" required placeholder="usuario@salud.gob.hn"></label>
+      <label class="field"><span class="lbl">Contraseña</span>
+        <div class="pw-row"><input type="password" id="pw" name="password" autocomplete="current-password" required>
+          <button type="button" class="btn ghost" id="toggle" aria-label="Mostrar u ocultar la contraseña">Ver</button></div></label>
+
+      <p class="form-err" id="err" role="alert" hidden></p>
+      <button type="submit" class="btn" id="submit">Ingresar</button>
+      <p class="auth-links" id="reg-link">¿No tienes cuenta? <a href="registro.html">Regístrate como Usuario</a></p>
+    </form>
+
+    <!-- Configuración inicial: solo aparece cuando aún no existe ningún usuario -->
+    <form class="auth-body" id="f-setup" novalidate hidden autocomplete="off">
+      <p class="role-hint"><strong>Primer uso.</strong> Aún no hay usuarios. Crea la cuenta del <strong>Administrador</strong>; desde allí podrás crear las cuentas de Desarrollador y Supervisor.</p>
+      <label class="field"><span class="lbl">Nombre completo</span><input type="text" id="s-name" required maxlength="120"></label>
+      <label class="field"><span class="lbl">Nombre de usuario</span><input type="text" id="s-user" required maxlength="30" autocomplete="username"></label>
+      <label class="field"><span class="lbl">Correo electrónico</span><input type="email" id="s-email" required autocomplete="email"></label>
+      <label class="field"><span class="lbl">Contraseña</span><input type="password" id="s-pw" required autocomplete="new-password"><small class="muted">Mínimo 8 caracteres, con letras y números.</small></label>
+      <label class="field"><span class="lbl">Confirmar contraseña</span><input type="password" id="s-pw2" required autocomplete="new-password"></label>
+      <p class="form-err" id="s-err" role="alert" hidden></p>
+      <button type="submit" class="btn">Crear administrador</button>
+    </form>
+  </main>
+
+  <script src="js/auth.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

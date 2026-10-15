@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Solicitud de Cambios en Ambientes</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script src="js/auth.js"></script>
+  <script>Auth.guard(['USUARIO','ADMINISTRADOR'], { viewWithId: ['DESARROLLADOR'] });</script>
+</head>
+<body data-shell>
+
+  <main class="sheet">
+    <header class="letterhead">
+      <img src="img/logo.png" alt="Gobierno de la República de Honduras – Secretaría de Salud">
+    </header>
+
+    <form id="f" novalidate autocomplete="off">
+      <h1 class="doc-title">Solicitud de cambios en ambientes</h1>
+      <p class="doc-sub no-print">Los campos con <span style="color:var(--bad)">*</span> son obligatorios. Tu avance se guarda automáticamente en este navegador.</p>
+
+      <div id="done" class="done" hidden>
+        <h3>✔ Solicitud registrada</h3>
+        <div id="done-msg"></div>
+        <div class="row">
+          <button type="button" class="btn" id="b-print2">Imprimir / Guardar PDF</button>
+          <a class="btn ghost" href="index.html">Ver historial</a>
+          <button type="button" class="btn ghost" id="b-new">Nueva solicitud</button>
+        </div>
+      </div>
+
+      <!-- ENCABEZADO -->
+      <section class="section">
+        <h2>Solicitud de cambios en ambientes</h2>
+        <div class="body">
+          <div class="grid">
+            <label class="field req col-6"><span class="lbl">Nombre del cambio</span>
+              <input type="text" name="nombre_cambio" maxlength="200" required placeholder="Ej.: Actualización del módulo de pacientes"></label>
+            <label class="field req col-3"><span class="lbl">Fecha de solicitud</span>
+              <input type="date" name="fecha_solicitud" required></label>
+            <label class="field req col-3"><span class="lbl">Cód. de documento</span>
+              <input type="text" name="codigo" maxlength="40" required placeholder="SCA-2026-001"></label>
+
+            <fieldset class="field req col-6"><legend>Clasificación del cambio</legend>
+              <div class="choices">
+                <label class="choice"><input type="radio" name="clasificacion" value="Normal" required><span>Normal</span></label>
+                <label class="choice c-critica"><input type="radio" name="clasificacion" value="Emergencia"><span>Emergencia</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field req col-6"><legend>Nivel de criticidad</legend>
+              <div class="choices">
+                <label class="choice c-baja"><input type="radio" name="criticidad" value="Baja" required><span>Baja</span></label>
+                <label class="choice c-media"><input type="radio" name="criticidad" value="Media"><span>Media</span></label>
+                <label class="choice c-alta"><input type="radio" name="criticidad" value="Alta"><span>Alta</span></label>
+                <label class="choice c-critica"><input type="radio" name="criticidad" value="Crítica"><span>Crítica</span></label>
+              </div>
+            </fieldset>
+
+            <label class="field req col-12" id="emerg-box" hidden><span class="lbl">Justificación de la emergencia</span>
+              <textarea name="justificacion" placeholder="Explique por qué el cambio no puede seguir el flujo normal."></textarea></label>
+          </div>
+        </div>
+      </section>
+
+      <!-- DATOS DEL DESARROLLADOR -->
+      <section class="section">
+        <h2>Datos generales del desarrollador / programador</h2>
+        <div class="body">
+          <div class="grid">
+            <label class="field req col-6"><span class="lbl">Nombre del solicitante</span>
+              <input type="text" name="solicitante" maxlength="150" required></label>
+            <label class="field req col-6"><span class="lbl">Puesto</span>
+              <input type="text" name="puesto" maxlength="120" required></label>
+          </div>
+        </div>
+      </section>
+
+      <!-- DETALLES -->
+      <section class="section">
+        <h2>Detalles del cambio</h2>
+        <div class="body">
+          <div class="grid">
+            <fieldset class="field req col-12"><legend>Tipo de mantenimiento</legend>
+              <div class="choices">
+                <label class="choice"><input type="checkbox" name="tipo[]" value="Infraestructura"><span>Infraestructura</span></label>
+                <label class="choice"><input type="checkbox" name="tipo[]" value="Aplicaciones/Programa"><span>Aplicaciones/Programa</span></label>
+                <label class="choice"><input type="checkbox" name="tipo[]" value="Datos"><span>Datos</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="field req col-12" id="subtipo-box" hidden><legend>Subtipo de mantenimiento (Infraestructura)</legend>
+              <div class="choices">
+                <label class="choice"><input type="checkbox" name="subtipo[]" value="Windows"><span>Windows</span></label>
+                <label class="choice"><input type="checkbox" name="subtipo[]" value="Energía"><span>Energía</span></label>
+                <label class="choice"><input type="checkbox" name="subtipo[]" value="Enfriamiento"><span>Enfriamiento</span></label>
+                <label class="choice"><input type="checkbox" name="subtipo[]" value="Linux"><span>Linux</span></label>
+                <label class="choice"><input type="checkbox" name="subtipo[]" value="Comunicaciones"><span>Comunicaciones</span></label>
+                <label class="choice"><input type="checkbox" name="subtipo[]" value="Servidor"><span>Servidor</span></label>
+              </div>
+            </fieldset>
+
+            <label class="field req col-8"><span class="lbl">Nombre del sistema</span>
+              <input type="text" name="sistema" maxlength="150" required></label>
+            <label class="field col-4"><span class="lbl">Versión</span>
+              <input type="text" name="version" maxlength="30" placeholder="Ej.: 2.4.1"></label>
+          </div>
+        </div>
+      </section>
+
+      <!-- ANEXO I -->
+      <section class="section">
+        <h2>Anexo I. Procedimiento (paso a paso)</h2>
+        <div class="body">
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th>Detalle de actividad</th><th style="width:28%">Responsable de ejecutar la actividad</th><th class="del"></th></tr></thead>
+              <tbody id="t-proc" data-dyn>
+                <template><tr>
+                  <td><textarea name="proc_act[]" aria-label="Detalle de actividad" placeholder="Describa el paso a ejecutar"></textarea></td>
+                  <td><input type="text" name="proc_resp[]" aria-label="Responsable de ejecutar la actividad"></td>
+                  <td class="del"><button type="button" class="icon-btn" data-del title="Eliminar fila" aria-label="Eliminar fila">×</button></td>
+                </tr></template>
+              </tbody>
+            </table>
+          </div>
+          <div class="tbl-actions no-print"><button type="button" class="btn ghost sm" data-add="t-proc">+ Agregar paso</button></div>
+        </div>
+      </section>
+
+      <!-- ANEXO II -->
+      <section class="section">
+        <h2>Anexo II. Lista de archivos</h2>
+        <div class="body">
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th style="width:40%">Folder / Programa</th><th>Archivos</th><th class="del"></th></tr></thead>
+              <tbody id="t-arch" data-dyn>
+                <template><tr>
+                  <td><input type="text" name="arch_folder[]" aria-label="Folder o programa" placeholder="/var/www/app/"></td>
+                  <td><textarea name="arch_files[]" aria-label="Archivos" placeholder="Un archivo por línea"></textarea></td>
+                  <td class="del"><button type="button" class="icon-btn" data-del title="Eliminar fila" aria-label="Eliminar fila">×</button></td>
+                </tr></template>
+              </tbody>
+            </table>
+          </div>
+          <div class="tbl-actions no-print"><button type="button" class="btn ghost sm" data-add="t-arch">+ Agregar fila</button></div>
+        </div>
+      </section>
+
+      <!-- ANEXO III -->
+      <section class="section">
+        <h2>Anexo III. Sistemas o servicios afectados</h2>
+        <div class="body">
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th style="width:32%">Nombre del sistema</th><th>Descripción del cambio</th><th class="del"></th></tr></thead>
+              <tbody id="t-afec" data-dyn>
+                <template><tr>
+                  <td><input type="text" name="afec_sis[]" aria-label="Nombre del sistema"></td>
+                  <td><textarea name="afec_desc[]" aria-label="Descripción del cambio"></textarea></td>
+                  <td class="del"><button type="button" class="icon-btn" data-del title="Eliminar fila" aria-label="Eliminar fila">×</button></td>
+                </tr></template>
+              </tbody>
+            </table>
+          </div>
+          <div class="tbl-actions no-print"><button type="button" class="btn ghost sm" data-add="t-afec">+ Agregar fila</button></div>
+        </div>
+      </section>
+
+      <!-- ANEXO IV -->
+      <section class="section">
+        <h2>Anexo IV. Plan de pruebas a realizarse posterior a la aplicación del cambio</h2>
+        <div class="body">
+          <div class="grid" style="padding-bottom:0">
+            <label class="field col-12"><span class="lbl">Descripción de la prueba a realizarse</span>
+              <textarea name="prueba_desc" placeholder="Describa de forma general las pruebas que se ejecutarán."></textarea></label>
+          </div>
+          <div class="subhead" style="margin-top:16px">Detalle por folder / programa</div>
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th style="width:40%">Folder / Programa</th><th>Descripción</th><th class="del"></th></tr></thead>
+              <tbody id="t-prueba" data-dyn>
+                <template><tr>
+                  <td><input type="text" name="prueba_folder[]" aria-label="Folder o programa"></td>
+                  <td><textarea name="prueba_det[]" aria-label="Descripción"></textarea></td>
+                  <td class="del"><button type="button" class="icon-btn" data-del title="Eliminar fila" aria-label="Eliminar fila">×</button></td>
+                </tr></template>
+              </tbody>
+            </table>
+          </div>
+          <div class="tbl-actions no-print"><button type="button" class="btn ghost sm" data-add="t-prueba">+ Agregar fila</button></div>
+        </div>
+      </section>
+
+      <!-- ANEXO V -->
+      <section class="section">
+        <h2>Anexo V. Resultados de la aplicación de los cambios</h2>
+        <div class="body">
+          <div class="grid" style="padding-bottom:0">
+            <label class="field col-12"><span class="lbl">Detalle de actividad</span>
+              <textarea name="res_det" placeholder="Se completa una vez aplicado el cambio."></textarea></label>
+          </div>
+          <div class="subhead" style="margin-top:16px">Detalle por folder / programa</div>
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th style="width:40%">Folder / Programa</th><th>Descripción</th><th class="del"></th></tr></thead>
+              <tbody id="t-res" data-dyn>
+                <template><tr>
+                  <td><input type="text" name="res_folder[]" aria-label="Folder o programa"></td>
+                  <td><textarea name="res_desc[]" aria-label="Descripción"></textarea></td>
+                  <td class="del"><button type="button" class="icon-btn" data-del title="Eliminar fila" aria-label="Eliminar fila">×</button></td>
+                </tr></template>
+              </tbody>
+            </table>
+          </div>
+          <div class="tbl-actions no-print"><button type="button" class="btn ghost sm" data-add="t-res">+ Agregar fila</button></div>
+        </div>
+      </section>
+
+      <footer class="sheet-foot">
+        <span class="ver">Versión 2.1</span>
+        <img src="img/footer.png" alt="Barrio El Centro, Avenida Cervantes, contiguo al Correo Nacional, Tegucigalpa, M.D.C. Honduras · www.salud.gob.hn">
+      </footer>
+
+      <div class="actions no-print">
+        <button type="submit" class="btn">Registrar solicitud</button>
+        <button type="button" class="btn ghost" id="b-print">Imprimir / PDF</button>
+        <button type="button" class="btn ghost" id="b-json">Descargar JSON</button>
+        <span class="spacer"></span>
+        <span class="status" id="status" aria-live="polite"></span>
+        <button type="button" class="btn danger" id="b-clear">Limpiar</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/cambios.js"></script>
+</body>
+</html>
