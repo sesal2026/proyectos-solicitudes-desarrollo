@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost';
 $db   = 'ugi_proyecto_db'; // Cambia esto por el nombre de tu base de datos
-$user = 'root'; // Cambia esto por tu usuario de MySQL
+$user = 'admin_ugi'; // Cambia esto por tu usuario de MySQL
 $pass = 'sesal2026'; // Cambia esto por tu contraseña
 
 try {
